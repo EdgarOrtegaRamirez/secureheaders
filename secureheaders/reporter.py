@@ -85,8 +85,10 @@ def format_text(result: ScanResult) -> str:
         lines.append(f"  Redirects: {' → '.join(result.redirect_chain)}")
 
     # Summary
-    lines.append(f"\n  Summary: {len(result.passed)} passed, "
-                 f"{len(result.failed)} failed, {len(result.warnings)} warnings")
+    lines.append(
+        f"\n  Summary: {len(result.passed)} passed, "
+        f"{len(result.failed)} failed, {len(result.warnings)} warnings"
+    )
 
     if result.critical_count:
         lines.append(f"  🔴 Critical: {result.critical_count}")
@@ -121,6 +123,7 @@ def format_text(result: ScanResult) -> str:
 # JSON report
 # ---------------------------------------------------------------------------
 
+
 def format_json(results: list[ScanResult], pretty: bool = True) -> str:
     """Generate a JSON report for one or more ScanResults."""
     if len(results) == 1:
@@ -130,10 +133,7 @@ def format_json(results: list[ScanResult], pretty: bool = True) -> str:
             "results": [result_to_dict(r) for r in results],
             "summary": {
                 "total_urls": len(results),
-                "average_score": (
-                    sum(r.score for r in results) // len(results)
-                    if results else 0
-                ),
+                "average_score": (sum(r.score for r in results) // len(results) if results else 0),
                 "passed": sum(1 for r in results if r.score >= 80),
                 "failed": sum(1 for r in results if r.score < 80),
             },
@@ -146,6 +146,7 @@ def format_json(results: list[ScanResult], pretty: bool = True) -> str:
 # ---------------------------------------------------------------------------
 # Markdown report
 # ---------------------------------------------------------------------------
+
 
 def format_markdown(results: list[ScanResult]) -> str:
     """Generate a Markdown report for one or more ScanResults."""

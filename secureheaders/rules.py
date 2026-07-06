@@ -10,6 +10,7 @@ from .models import Finding, HeaderStatus, Severity
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _header_value(headers: dict[str, str], name: str) -> str | None:
     """Case-insensitive header lookup."""
     for key, val in headers.items():
@@ -38,6 +39,7 @@ def _parse_directives(value: str) -> dict[str, str]:
 # ---------------------------------------------------------------------------
 # Rules
 # ---------------------------------------------------------------------------
+
 
 def check_strict_transport_security(headers: dict[str, str]) -> Finding:
     """Check for HSTS header."""
@@ -444,9 +446,7 @@ def check_cross_origin_resource_policy(headers: dict[str, str]) -> Finding:
             status=HeaderStatus.MISSING,
             severity=Severity.LOW,
             title="Cross-Origin-Resource-Policy header missing",
-            description=(
-                "Without CORP, cross-origin reads of this resource are unrestricted."
-            ),
+            description=("Without CORP, cross-origin reads of this resource are unrestricted."),
             recommendation="Add: Cross-Origin-Resource-Policy: same-origin",
         )
 

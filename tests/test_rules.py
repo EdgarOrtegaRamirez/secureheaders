@@ -24,9 +24,7 @@ class TestHSTS:
         assert f.severity == Severity.HIGH
 
     def test_strong(self):
-        headers = {
-            "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload"
-        }
+        headers = {"Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload"}
         f = check_strict_transport_security(headers)
         assert f.status == HeaderStatus.PASS
 

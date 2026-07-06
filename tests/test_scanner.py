@@ -1,6 +1,5 @@
 """Tests for the HTTP scanner."""
 
-
 from secureheaders.scanner import scan_url
 
 

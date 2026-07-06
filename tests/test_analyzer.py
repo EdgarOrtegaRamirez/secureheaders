@@ -6,8 +6,11 @@ from secureheaders.models import Finding, HeaderStatus, ScanResult, Severity
 
 def _f(status: HeaderStatus, severity: Severity, header: str = "A") -> Finding:
     return Finding(
-        header=header, status=status, severity=severity,
-        title="t", description="d",
+        header=header,
+        status=status,
+        severity=severity,
+        title="t",
+        description="d",
     )
 
 
@@ -78,12 +81,14 @@ class TestAnalyze:
     def test_error_result(self):
         result = ScanResult(url="https://bad.test", error="Connection failed")
         from secureheaders.analyzer import analyze
+
         analyze(result)
         assert result.score == 0
         assert result.grade == "F"
 
     def test_headers_analyzed(self):
         from secureheaders.analyzer import analyze
+
         result = ScanResult(
             url="https://example.com",
             status_code=200,

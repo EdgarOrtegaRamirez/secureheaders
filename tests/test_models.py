@@ -6,8 +6,11 @@ from secureheaders.models import Finding, HeaderStatus, ScanResult, Severity
 def _f(status: HeaderStatus, severity: Severity) -> Finding:
     """Helper to create a Finding with minimal boilerplate."""
     return Finding(
-        header="X", status=status, severity=severity,
-        title="t", description="d",
+        header="X",
+        status=status,
+        severity=severity,
+        title="t",
+        description="d",
     )
 
 

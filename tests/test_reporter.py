@@ -39,18 +39,21 @@ class TestResultToDict:
 class TestFormatText:
     def test_contains_url(self):
         from secureheaders.reporter import format_text
+
         r = _make_result()
         text = format_text(r)
         assert "https://example.com" in text
 
     def test_contains_score(self):
         from secureheaders.reporter import format_text
+
         r = _make_result()
         text = format_text(r)
         assert "Score:" in text
 
     def test_error_report(self):
         from secureheaders.reporter import format_text
+
         r = _make_result(error="Connection failed")
         text = format_text(r)
         assert "ERROR" in text

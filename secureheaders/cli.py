@@ -37,10 +37,7 @@ def _print_rich_result(result: ScanResult) -> None:
 
     console.print(f"\n[bold]{'=' * 60}[/]")
     console.print(f"  [bold]{result.url}[/]")
-    console.print(
-        f"  Score: [{score_color}]{result.score}/100"
-        f" — Grade: {result.grade}[/]"
-    )
+    console.print(f"  Score: [{score_color}]{result.score}/100 — Grade: {result.grade}[/]")
     console.print(f"  Status: HTTP {result.status_code}")
 
     if result.redirect_chain and len(result.redirect_chain) > 1:
@@ -57,9 +54,7 @@ def _print_rich_result(result: ScanResult) -> None:
     )
 
     # Findings table
-    table = Table(
-        show_header=True, header_style="bold", show_lines=False, pad_edge=False
-    )
+    table = Table(show_header=True, header_style="bold", show_lines=False, pad_edge=False)
     table.add_column("Status", width=3, justify="center")
     table.add_column("Severity", width=8)
     table.add_column("Header", width=30)
@@ -108,11 +103,17 @@ def main(verbose: bool) -> None:
 @main.command()
 @click.argument("urls", nargs=-1, required=True)
 @click.option(
-    "--format", "-f", "fmt",
-    type=FORMAT_CHOICE, default="text",
+    "--format",
+    "-f",
+    "fmt",
+    type=FORMAT_CHOICE,
+    default="text",
 )
 @click.option(
-    "--timeout", "-t", type=float, default=15.0,
+    "--timeout",
+    "-t",
+    type=float,
+    default=15.0,
     help="Connection timeout in seconds.",
 )
 @click.option("--no-redirect", is_flag=True, help="Do not follow redirects.")
@@ -149,15 +150,23 @@ def scan(
 @main.command()
 @click.argument("file", type=click.File("r"))
 @click.option(
-    "--format", "-f", "fmt",
-    type=FORMAT_CHOICE, default="text",
+    "--format",
+    "-f",
+    "fmt",
+    type=FORMAT_CHOICE,
+    default="text",
 )
 @click.option(
-    "--timeout", "-t", type=float, default=15.0,
+    "--timeout",
+    "-t",
+    type=float,
+    default=15.0,
     help="Connection timeout in seconds.",
 )
 @click.option(
-    "--threshold", type=int, default=0,
+    "--threshold",
+    type=int,
+    default=0,
     help="Exit with code 1 if score is below this threshold.",
 )
 def batch(
@@ -215,55 +224,68 @@ def headers() -> None:
 
     descriptions = {
         "check_strict_transport_security": (
-            "Strict-Transport-Security", "HIGH",
+            "Strict-Transport-Security",
+            "HIGH",
             "HSTS prevents downgrade",
         ),
         "check_content_security_policy": (
-            "Content-Security-Policy", "HIGH",
+            "Content-Security-Policy",
+            "HIGH",
             "Prevents XSS/injection",
         ),
         "check_x_content_type_options": (
-            "X-Content-Type-Options", "MEDIUM",
+            "X-Content-Type-Options",
+            "MEDIUM",
             "Prevents MIME sniffing",
         ),
         "check_x_frame_options": (
-            "X-Frame-Options", "MEDIUM",
+            "X-Frame-Options",
+            "MEDIUM",
             "Prevents clickjacking",
         ),
         "check_referrer_policy": (
-            "Referrer-Policy", "LOW",
+            "Referrer-Policy",
+            "LOW",
             "Controls referrer info",
         ),
         "check_permissions_policy": (
-            "Permissions-Policy", "LOW",
+            "Permissions-Policy",
+            "LOW",
             "Restricts browser features",
         ),
         "check_x_xss_protection": (
-            "X-XSS-Protection", "LOW",
+            "X-XSS-Protection",
+            "LOW",
             "Legacy XSS filter",
         ),
         "check_cross_origin_opener_policy": (
-            "Cross-Origin-Opener-Policy", "LOW",
+            "Cross-Origin-Opener-Policy",
+            "LOW",
             "Isolates browsing context",
         ),
         "check_cross_origin_embedder_policy": (
-            "Cross-Origin-Embedder-Policy", "LOW",
+            "Cross-Origin-Embedder-Policy",
+            "LOW",
             "Spectre mitigation",
         ),
         "check_cross_origin_resource_policy": (
-            "Cross-Origin-Resource-Policy", "LOW",
+            "Cross-Origin-Resource-Policy",
+            "LOW",
             "Controls cross-origin reads",
         ),
         "check_server_header": (
-            "Server", "LOW",
+            "Server",
+            "LOW",
             "Should not leak version",
         ),
         "check_x_powered_by": (
-            "X-Powered-By", "LOW",
+            "X-Powered-By",
+            "LOW",
             "Should not leak tech info",
         ),
         "check_cache_control": (
-            "Cache-Control", "INFO",
+            "Cache-Control",
+            "INFO",
             "Caching for sensitive data",
         ),
     }
